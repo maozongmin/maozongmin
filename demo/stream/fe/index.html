@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chatgpt stream 响应数据SSE测试 demo</title>
+  </head>
+  <body>
+    <button class="btn">请求接口</button>
+    <div id="result" style="word-wrap: break-word"></div>
+    <script type="module">
+      let resultEl = document.querySelector('#result');
+      // SSE https://developer.mozilla.org/zh-CN/docs/Web/API/Server-sent_events/Using_server-sent_events#%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%8F%97%E4%BA%8B%E4%BB%B6
+      // 前端 EventStream API 发起请求，后端 Koa，ctx.body 设置 stream 可写流，ctx.set 响应类型 text/event-stream。
+      document.querySelector('.btn').addEventListener('click', () => {
+        const sse = new EventSource('/open-ai/sendMsg');
+        const evtSource = new EventSource('/open-ai/sendMsg');
+        evtSource.onmessage = function (event) {
+          console.log('message: ' + event.data);
+          console.log(event);
+          resultEl.innerHTML += event.data;
+          // evtSource.close(); // 手动关闭
+        };
+        evtSource.addEventListener('userconnect', function (event) {
+          console.log('userconnect: ' + event.data);
+        });
+      });
+    </script>
+  </body>
+</html>

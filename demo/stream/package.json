@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "koa": "^2.15.3",
+    "koa-router": "^12.0.1",
+    "koa-static": "^5.0.0",
+    "nodemon": "^3.1.4",
+    "stream": "^0.0.3"
+  },
+  "scripts": {
+    "node": "nodemon --exec node ./index2.js"
+  }
+}
