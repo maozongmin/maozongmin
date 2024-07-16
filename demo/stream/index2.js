@@ -26,10 +26,10 @@ router.get('/open-ai/sendMsg', async (ctx) => {
       //   streamData.write(`data: [DONE]\n\n`);
       // }, 3000);
     } else {
-      // streamData.write(`data: ${i}\n\n`);
-      streamData.write(
-        `event: userconnect\ndata: {"username": "bobby", "time": "02:33:48"}\n\n`
-      );
+      streamData.write(`data: ${i}\n\n`);
+      // streamData.write(
+      //   `event: userconnect\ndata: {"username": "bobby", "time": "02:33:48"}\n\n`
+      // );
     }
     i++;
   }, 500);
